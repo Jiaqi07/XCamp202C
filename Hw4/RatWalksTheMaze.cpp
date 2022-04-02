@@ -66,5 +66,9 @@
 ////    }
 //
 //    cout << count << '\n' << minAns;
+//    for (int i = 0; i < n; i++) delete[](maze[i]);
+//    delete[](maze);
+//    for (int i = 0; i < n; i++) delete[](dist[i]);
+//    delete[](dist);
 //    return 0;
 //}
