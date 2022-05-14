@@ -1,73 +1,71 @@
-#include <iostream>
-#include <algorithm>
-#include <queue>
-using namespace std;
-
-int **maze, **dist;
-int dirX[4] = { 0, 0, 1, -1 }, dirY[4] = { 1, -1, 0, 0 };
-
-struct PNT {
-    int x, y;
-    PNT (int x0, int y0) : x(x0), y(y0){};
-};
-queue<PNT> q;
-
-int main() {
-    int N, minAns = 1e9, count = 0, sx, sy, ex, ey;
-    cin >> N;
-
-    maze = new int*[N];
-    dist = new int*[N];
-
-    for(int i = 0; i < N; i++){
-        maze[i] = new int[N];
-        dist[i] = new int[N];
-    }
-
-    for(int i = 0; i < N; ++i){
-        for(int j = 0; j < N; ++j){
-            cin >> maze[i][j];
-            dist[i][j] = 0;
-        }
-    }
-
-    dist[sx][sy] = 1;
-    q.push({sx,sy});
-
-    while(!q.empty()) {
-        PNT pt = q.front();
-        q.pop();
-
-        for(int i = 0; i < 4; i++) {
-            int nx = pt.x+dirX[i], ny = pt.y+dirY[i];
-
-            if (nx >= 0 && nx < N && ny >= 0 && ny < N && dist[nx][ny] == dist[pt.x][pt.y]+1 && maze[nx][ny] == 0) {
-                dist[nx][ny] = dist[pt.x][pt.y]+1;
-
-                if(nx == ex && ny == ey){
-                    if(dist[N-1][N-1] < minAns){
-                        count = 0;
-                        minAns = dist[nx][ny];
-                    }
-                    if(dist[nx][ny] == minAns){
-                        ++count;
-                    }
-                }
-                q.push(PNT(nx, ny));
-            }
-        }
-    }
-//    for(int i = 0; i < N; ++i){
-//        for(int j = 0; j < N; ++j){
-//            cout << dist[i][j] << ' ';
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//int maze[51][51], visited[51][51], dirX[4] = { 0, 0, 1, -1 }, dirY[4] = { 1, -1, 0, 0 }, totalWays = 0, N, M;
+//
+//bool CanWeMove(int rowNew, int colNew){
+//    if ((rowNew >= 0) && (rowNew < N) && (colNew >= 0) && (colNew < N) && (maze[rowNew][colNew] == 0) && (visited[rowNew][colNew] == 0))
+//        return true;
+//    return false;
+//}
+//
+//void FindPathInMaze(int row, int col, int desRow, int desCol, int dir, int turn){
+//    if ((row == desRow) && (col == desCol)){
+//        if(turn <= K){
+//            ++totalWays;
+//            cout << turn << "!=" << K << '\n';
 //        }
-//        cout << '\n';
 //    }
-
-    cout << count << '\n' << minAns;
-    for (int i = 0; i < n; i++) delete[](maze[i]);
-    delete[](maze);
-    for (int i = 0; i < n; i++) delete[](dist[i]);
-    delete[](dist);
-    return 0;
-}
+//    else{
+//        int temp = dir;
+//        for (int index = 0; index < 4; index++)
+//        {
+//            int rowNew = row + dirX[index];
+//            int colNew = col + dirY[index];
+//            if (CanWeMove(rowNew, colNew))
+//            {
+//                visited[rowNew][colNew] = 1;
+//                if(dir != index){
+//                    ++turn;
+//                    dir = index;
+//                }
+//                if(turn > K){
+//                    dir=temp;
+//                    continue;
+//                }
+//                FindPathInMaze(rowNew, colNew, desRow, desCol, turn, dir);
+//                dir = temp;
+//                --turn;
+//                visited[rowNew][colNew] = 0;
+//            }
+//        }
+//    }
+//}
+//
+//int main() {
+//    cin >> N >> M;
+//
+//    char in;
+//    for(int i = 0; i < N; ++i){
+//        for(int j = 0; j < M; ++j){
+//            cin >> in;
+//            if (in == '.') { //Normal
+//                maze[i][j] = 0;
+//            }
+//            else if (in == 'H') {
+//                maze[i][j] = 1; //Hay bales
+//            }
+//            visited[i][j] = 0;
+//            //cout << maze[i][j] << " ";
+//        }
+//        //cout << '\n';
+//    }
+//    visited[0][0] = 1;
+//
+//    totalWays = 0;
+//    FindPathInMaze(0, 0, N-1, N-1, -1, -1); //EXECUTE DEPTH FIRST SEARCH
+//    cout << totalWays << '\n';
+//
+//    return 0;
+//}
