@@ -1,24 +1,41 @@
-//#include<stdio.h>
-//#include<cstring>
+//#include <iostream>
+//#include <algorithm>
 //using namespace std;
-//long f[10001],n,i,j,max,ans,xx,y;
-//int main()
-//{
-//    //freopen("chores.in","r",stdin);freopen("chores.out","w",stdout);
-//    scanf("%ld",&n);
-//    for (i=1;i<=n;i++)
-//    {
-//        scanf("%ld",&f[i]);
-//        scanf("%ld",&xx);max=0;
-//        for (j=1;j<=xx;j++)
-//        {
-//            scanf("%ld",&y);
-//            if (f[y]>max) max=f[y];
-//        }
-//        f[i]+=max;
-//        if (f[i]>ans) ans=f[i];
+//
+//int n, chores[10011], len[10011], s[10011][111], sum[10011], f[10011];
+//
+//int work(int x) {
+//    int ans = 0;
+//
+//    for (int i = 1; i <= sum[x]; ++i){
+//        ans = max(ans, f[s[x][i]]);
 //    }
-//    printf("%ld",ans);
-//    //scanf("%ld",&n);
+//    return ans+len[x];
+//}
+//
+//int main(){
+//    cin >> n;
+//
+//    for(int i = 1; i <= n; ++i){
+//        cin >> chores[i] >> len[i];
+//        int x;
+//        cin >> x;
+//
+//        while(x != 0){
+//            sum[i]++;
+//            s[i][sum[i]] = x;
+//            cin >> x; //Finish Row
+//        }
+//    }
+//
+//    for(int i = 0; i <= n; ++i) {
+//        f[i] = work(i);
+//    }
+//
+//    int ans = 0;
+//    for(int i = 1; i <= n; ++i) {
+//        ans = max(ans, f[i]);
+//    }
+//    cout << ans;
 //    return 0;
 //}
